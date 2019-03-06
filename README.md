@@ -1,1 +1,4 @@
-# TLStorage
+### TLStorage
+
+localStorage with time limit～
+
