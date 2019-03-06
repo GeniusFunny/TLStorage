@@ -4,7 +4,7 @@ class TLStorage {
     time = time > 0 ? time * 1000 : 24 * 3600 * 1000
     let wrapItem = TLStorage.wrapValue(value, time) //  包装数据项
     localStorage.setItem(key, JSON.stringify(wrapItem)) // 将包装后的数据项存入storage
-    // TLStorage.autoDelete(key, time) //  触发一个自动删除的timeout，适用于超短有效期并且标签页可能会关闭的情况下
+    TLStorage.autoDelete(key, time) //  触发一个自动删除的timeout，适用于超短有效期并且标签页可能会关闭的情况下
   }
   //  定时删除函数
   static autoDelete(key, time) {
@@ -27,7 +27,7 @@ class TLStorage {
       wrapItem = JSON.parse(wrapItem)
     }
     if (parseInt(wrapItem.expireTime) < now) {
-      localStorage.removeItem(key)
+      TLStorage.removeItem(key)
       return null
     } else {
       return wrapItem.value
@@ -42,5 +42,3 @@ class TLStorage {
     localStorage.removeItem(key)
   }
 }
-// TLStorage.setItem('name', 123, 20)
-TLStorage.getItem('name')
